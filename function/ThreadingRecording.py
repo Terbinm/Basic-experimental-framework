@@ -24,6 +24,7 @@ class AudioExperiment:
 
         # 播放音樂
         time.sleep(3)
+        
         # 結束時間
         end_time = time.time()
 
