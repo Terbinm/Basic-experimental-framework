@@ -7,7 +7,7 @@
     [path]  
     output_dir = out  #設定存檔路徑  
 * 實驗設定:  
-  [Experiment]  
+  [Audio]
   play_filename = config\\A.wav  
   record_filename = record.wav
 

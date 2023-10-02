@@ -71,9 +71,9 @@ class AudioExperiment:
 
 
     def run_experiment(self):
-        play_filename = self.config_data['Experiment']['play_filename']
-        record_filename = self.config_data['Experiment']['record_filename']
-        record_duration = self.config_data['Experiment']['record_duration']
+        play_filename = self.config_data['Audio']['play_filename']
+        record_filename = self.config_data['Audio']['record_filename']
+        record_duration = self.config_data['Audio']['record_duration']
         # ... (將config參數儲存並傳入)
 
         play_thread = threading.Thread(target=self.play_audio, args=(play_filename,))
