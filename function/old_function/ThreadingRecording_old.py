@@ -1,11 +1,16 @@
 import threading
 import time
-
+import sounddevice as sd
+import numpy as np
+from scipy.io.wavfile import write
+from scipy.io.wavfile import read
+import os
 class AudioExperiment:
     def __init__(self, config_data):
         self.config_data = config_data
-
+        print(config_data)
         #時間戳紀錄
+        self.experiment_time_result = None
         self.play_time_result = None
         self.record_time_result = None
 
@@ -16,9 +21,31 @@ class AudioExperiment:
 
         self.handle_results = None
 
+        self.sampling_rate = config_data['Audio']['sampling_rate']  # 取樣頻率
+        self.record_duration = config_data['Audio']['record_duration']  # 錄音時間，單位為秒
+        self.record_filename = config_data['Audio']['record_filename']  # 錄音檔名
+        self.final_dir = config_data['path']['output_dir-final']  # 最終目錄
+        self.input_dir = config_data['path']['input_dir']  # 輸入目錄
+        self.play_filename = config_data['path']['play_filename']   # 播放音樂
 
 
-    def play_audio(self, filename):
+    def play_audio(self):
+        # 開始時間
+        start_time = time.time()
+        audio_data = read(os.path.join(self.input_dir, self.play_filename))
+
+        # 播放音樂
+        sd.play(audio_data, samplerate=self.sampling_rate)
+        sd.wait()
+
+        # 結束時間
+        end_time = time.time()
+
+        self.play_time_result = start_time, end_time #設定本次時間點
+        self.is_play_finish = True #立flag
+
+
+    def play_audio(self):
         # 開始時間
         start_time = time.time()
 
@@ -32,18 +59,24 @@ class AudioExperiment:
         self.is_play_finish = True #立flag
 
 
-    def record_audio(self, filename, duration):
+    def record_audio(self):
         # 開始時間
         start_time = time.time()
 
         # 錄音
-        time.sleep(3)
+        recording = sd.rec(int(self.record_duration * self.sampling_rate), samplerate=self.sampling_rate, channels=2)
+        sd.wait()  # 等待錄音結束
 
         # 結束時間
         end_time = time.time()
 
+        # 建立完整的檔案路徑並寫入錄音檔案
+        full_path = os.path.join(self.final_dir, self.record_filename)
+        write(full_path, self.sampling_rate, recording)
+
         self.record_time_result = start_time, end_time #設定本次時間點
         self.is_record_finish = True #立flag
+    
 
     def process_results(self):
         # 確保兩個執行緒都已經完成
@@ -60,6 +93,7 @@ class AudioExperiment:
 
         # 建立一個字典來儲存你的變數
         results = {
+            'experiment_time_result': self.experiment_time_result,
             'play_result': self.play_time_result,
             'record_result': self.record_time_result,
             'is_play_finish': self.is_play_finish,
@@ -70,14 +104,11 @@ class AudioExperiment:
 
 
     def run_experiment(self):
-        play_filename = self.config_data['Experiment']['play_filename']
-        record_filename = self.config_data['Experiment']['record_filename']
-        record_duration = self.config_data['Experiment']['record_duration']
-        # ... (將config參數儲存並傳入)
 
-        play_thread = threading.Thread(target=self.play_audio, args=(play_filename,))
-        record_thread = threading.Thread(target=self.record_audio, args=(record_filename, record_duration))
+        play_thread = threading.Thread(target=self.play_audio, args=())
+        record_thread = threading.Thread(target=self.record_audio, args=())
 
+        self.experiment_time_result = time.time()
         play_thread.start()
         record_thread.start()
 

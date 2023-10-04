@@ -6,4 +6,5 @@
 啟動虛擬環境
     source /home/fish/.local/share/virtualenvs/web-team-jSOodXlP/bin/activate
 
+    source projectv2_venv/bin/activate
     
