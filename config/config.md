@@ -1,19 +1,13 @@
-# 配置說明   
+# config
+配置說明   
 
----
-### 必要配置
+#### Experiment.ini
+A、B、C三組分別存放事先input資料
 
-* 路徑設定:   
-  [path]  
-    output_dir = out  #設定存檔路徑  
-* 實驗設定:  
-  [Audio]
-  play_filename = A.wav  
-  record_filename = record.wav
+#### main.ini
+A、B、C三組共同制定受測者個人資料(最開端)
 
+#### main copy.ini
+較main.ini多ID(受測者ID選項)
 
-
----
-### 其他配置
-
-AAA
+#### server.ini
