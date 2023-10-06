@@ -1,9 +1,20 @@
 #讀取config
 from function.ConfigLoader import ConfigLoader
-config_data = ConfigLoader('config').config_dict
+from datetime import datetime
+
+
 
 
 #開始錄音
-from function.ThreadingRecording import AudioExperiment
-Experiment_Sound = AudioExperiment(config_data).run_experiment
-print(Experiment_Sound)
+from function.PMBRecording import UartGetTLVdata
+import serial
+
+if __name__ == "__main__":
+    config_data = ConfigLoader('config').config_dict
+
+    now = datetime.now()
+    timestamp = str(now.strftime("%Y-%m-%d %H-%M-%S"))
+
+    port = serial.Serial("/dev/ttyS0",baudrate = 921600, timeout = 0.5)
+    uartGetTLVdataObj = UartGetTLVdata(timestamp, port, 50)  # 在這裡設定自定義暫停點
+    uartGetTLVdataObj.run()

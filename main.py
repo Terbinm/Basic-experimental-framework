@@ -1,5 +1,6 @@
 import time
 
+
 #讀取config
 from function.ConfigLoader import ConfigLoader
 config_data = ConfigLoader('config').config_dict
