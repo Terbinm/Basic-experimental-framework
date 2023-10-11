@@ -14,7 +14,7 @@ old_function:已淘汰的測試function
 ## Test_function
 測試程式暫存場所
 ## venv
-source project_venv/bin/activate
+source /home/led/project/Basic-experimental-framework/venv/project_venv/bin/activate
 ## client.py
 run的時候要用這個
 ## output.wav

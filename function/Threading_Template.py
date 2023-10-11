@@ -4,6 +4,7 @@ import os
 import sys
 
 class MMwaveExperiment:
+    #TODO(LED): 獨立通用init模塊
     def __init__(self, config_data):
         self.config_data = config_data
         # print(config_data)
