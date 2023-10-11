@@ -23,7 +23,7 @@ class MMwaveExperiment:
         self.status = {
             'Experiment': "MMwave"
                        } #狀態輸出資訊
-
+    def __init__(self, config_data):
         #Audio配置檔讀取
         self.sampling_rate = config_data['Audio']['sampling_rate']  # 取樣頻率
         self.record_duration = config_data['Audio']['record_duration']  # 錄音時間，單位為秒
