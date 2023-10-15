@@ -1,0 +1,15 @@
+FROM python:3
+
+# 设置工作目录
+WORKDIR /home/led/project/Basic-experimental-framework
+
+# 安装依赖
+RUN apt-get update && apt-get install -y portaudio19-dev libopenblas-dev && \
+    pip install sounddevice numpy scipy pydub && \
+    rm -rf /var/lib/apt/lists/*
+
+# 复制应用程序文件
+COPY . .
+
+# 启动容器时激活虚拟环境
+CMD ["/bin/bash", "-c", "source /home/led/project/Basic-experimental-framework/venv/project_venv/bin/activate"]

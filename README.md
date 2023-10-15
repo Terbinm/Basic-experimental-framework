@@ -17,6 +17,7 @@ old_function:已淘汰的測試function
 source /home/led/project/Basic-experimental-framework/venv/project_venv/bin/activate
 ## client.py
 run的時候要用這個
+cd /home/led/project/Basic-experimental-framework/
 ## output.wav
 ## server.py
 ## test.py
