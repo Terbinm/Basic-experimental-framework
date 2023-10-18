@@ -43,3 +43,5 @@ print("finish")
 #     time.sleep(0.1)  # 暫停1秒
 # data_saver.save_data_to_json(MMwave_Experiment.get_handle_results(),config_data['path']['output_data_filename'])#儲存實驗結果
 # print("finish")
+
+#開始錄音實驗
