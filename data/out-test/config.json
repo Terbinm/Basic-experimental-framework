@@ -1,0 +1,44 @@
+{
+    "Personal Information": {
+        "id": 1,
+        "age": 70,
+        "gender": 0,
+        "blood_type": "A",
+        "height": 170,
+        "weight": 70,
+        "walking_stick": 0,
+        "surgery": 0,
+        "prosthesis": 0,
+        "activity": 30
+    },
+    "record": {
+        "host": "localhost",
+        "user": "user",
+        "password": "secret"
+    },
+    "aplay": {
+        "port": 8080,
+        "debug": false
+    },
+    "path": {
+        "output_dir": "out",
+        "input_dir": "data",
+        "output_dir-final": "",
+        "output_data_filename": "Experiment_results"
+    },
+    "set": {
+        "handle_time_out": 10
+    },
+    "Audio": {
+        "sampling_rate": 44100,
+        "play_filename": "play.wav",
+        "record_filename": "record.wav",
+        "record_duration": 5
+    },
+    "mmwave": {},
+    "mediapipe_detail": {},
+    "mediapipe": {
+        "frame_data": "pose_data.json",
+        "video": "walk_video.avi"
+    }
+}
