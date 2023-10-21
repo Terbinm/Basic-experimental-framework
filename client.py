@@ -1,22 +1,20 @@
-import time
+import time,os
 
+#設定路徑(程式執行的路徑)
+os.chdir("/home/led/project/Basic-experimental-framework")
 
 #讀取config
-
-config_dir = 'config'
+config_dir = 'config' # 設定config目錄，會自動讀取全部檔案
 
 from function.ConfigLoader import ConfigLoader
 config_data = ConfigLoader(config_dir).config_dict
 
+
 #創造資料夾並儲存
 from function.DataSaver import DataSaver
 data_saver = DataSaver(config_data) #初始化 儲存器物件
-path = data_saver.save(config_data, "config") #初始化資料夾
+config_data['path']['output_dir-final'] = data_saver.dir_path #設定資料夾
 
-#TODO(LED): 合併至DataSaver並重新倒出到config_data 
-if not config_data['path']['output_dir-final']:
-    config_data['path']['output_dir-final'] = data_saver.get_dir_path()
-    print(f"自動建立資料夾 - {config_data['path']['output_dir-final']}")
 
 
 #TODO(LED): 實驗任務調度器

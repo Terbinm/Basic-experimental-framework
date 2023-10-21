@@ -24,13 +24,6 @@ class ConfigLoader:
 
         return value
 
-    # def load_config(self, file_path):
-    #     config = configparser.ConfigParser()
-    #     with open(file_path, 'r', encoding='utf-8') as f:
-    #         config.read_file(f)
-    #     config_dict = {s: {k: self.convert_value(v) for k, v in config.items(s)} for s in config.sections()}
-    #     return config_dict
-
     def load_config(self, file_path):
         config = configparser.ConfigParser()
         with open(file_path, 'r', encoding='utf-8') as f:
