@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 
-from function.ButtonMonitor import ButtonMonitor
+from function.ButtonMonitorBasic import ButtonMonitor
 
 
 # 設置GPIO模式為BCM

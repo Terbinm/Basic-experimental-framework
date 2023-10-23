@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 class Button:
+    flag = 0
     def __init__(self, pin):
         self.pin = pin
         GPIO.setmode(GPIO.BCM)
@@ -9,7 +10,13 @@ class Button:
         GPIO.add_event_detect(self.pin, GPIO.FALLING, callback=self.button_callback, bouncetime=20)
 
     def button_callback(self, channel):
+        status = 1
+        if status == self.flag:
+            return
+        self.flag = 1
         print("Button was pushed!")
+
+
 
     def cleanup(self):
         GPIO.cleanup()
