@@ -15,7 +15,7 @@ class DataSaver:
         path_set = None
         if not config_data['path']['output_dir-final']:
             now = datetime.now()
-            path_set = str(now.strftime("%Y-%m-%d %H-%M-%S"))
+            path_set = str(now.strftime("%Y-%m-%d-%H-%M-%S"))
             config_data['path']['output_dir-final'] = str(now.strftime("%Y-%m-%d %H-%M-%S"))
         else:
             path_set = config_data['path']['output_dir-final']

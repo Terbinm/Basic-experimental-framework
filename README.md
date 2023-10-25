@@ -1,6 +1,13 @@
 # Basic-experimental-framework
 讀取config，並進行實驗後記錄 (以聲音錄製+撥放為例)
 
+    # 設置GPIO模式為BCM
+    GPIO.setmode(GPIO.BCM)
+
+    # 定義按鈕和LED的GPIO針腳
+    button_pins = [17, 27, 22]  # 三個按鈕的GPIO針腳
+    led_pins = [2, 3, 4]  # 三個LED的GPIO針腳 #紅，橘，綠
+
 ***尚未寫說明***
 ## config
 A組配置檔，含部分B、C三組
