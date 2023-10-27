@@ -12,13 +12,21 @@ class DataSaver:
     def create_directory(self,config_data):
         # 建立一個名為當前時間戳的資料夾於out資料夾下
 
+        # 支持自定義命名
+        # path_set = None
+        # if not config_data['path']['output_dir-final']:
+        #     now = datetime.now()
+        #     path_set = str(now.strftime("%Y-%m-%d-%H-%M-%S"))
+        #     config_data['path']['output_dir-final'] = path_set
+        # else:
+        #     path_set = config_data['path']['output_dir-final']
+
+
+        # 不支持自定義命名
         path_set = None
-        if not config_data['path']['output_dir-final']:
-            now = datetime.now()
-            path_set = str(now.strftime("%Y-%m-%d-%H-%M-%S"))
-            config_data['path']['output_dir-final'] = str(now.strftime("%Y-%m-%d %H-%M-%S"))
-        else:
-            path_set = config_data['path']['output_dir-final']
+        now = datetime.now()
+        path_set = str(now.strftime("%Y-%m-%d-%H-%M-%S"))
+        config_data['path']['output_dir-final'] = path_set
 
         self.dir_path = os.path.join(self.out_base_path, path_set)
         os.makedirs(self.dir_path, exist_ok=True)
