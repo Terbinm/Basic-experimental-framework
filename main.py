@@ -22,8 +22,10 @@ config_dir = 'config' # 設定config目錄，會自動讀取全部檔案
 edgeID = 'Sound3' #裝置編號
 ###############################################################
 
+#讀取config
+config_data = ConfigLoader(config_dir).config_dict
 # 創建LED控制器
-led_controller = LEDController()
+led_controller = LEDController(config_data)
 
 # 定義按鈕的功能
 def DoEx(channel):#啟動錄音
@@ -49,16 +51,15 @@ def DoEx(channel):#啟動錄音
 
 def turn_on_leds(channel):#強制暫停(TODO)
     print("開啟LED燈")
-    for pin in led_controller.led_pins:
+    for pin in led_controller.all_pins:
         led_controller.turn_on(pin)
 
 def turn_off_leds(channel):#無功能，暫時為重設LED燈(好像沒用(X))
     print("關閉LED燈")
-    for pin in led_controller.led_pins:
+    for pin in led_controller.all_pins:
         led_controller.turn_off(pin)
 
-#讀取config
-config_data = ConfigLoader(config_dir).config_dict
+
 
 # #創造資料夾並儲存
 # data_saver = DataSaver(config_data) #初始化 儲存器物件
@@ -66,7 +67,7 @@ config_data = ConfigLoader(config_dir).config_dict
 
 # 創建按鈕控制器，並將按鈕的功能作為參數傳遞
 button_functions = [DoEx, turn_on_leds, turn_off_leds]
-button_controller = ButtonController(button_functions=button_functions, led_controller=led_controller) #onboard處理
+button_controller = ButtonController(config_data,button_functions=button_functions, led_controller=led_controller) #onboard處理
 thread = threading.Thread(target=button_controller.run, args=())
 # 運行按鈕控制器
 
