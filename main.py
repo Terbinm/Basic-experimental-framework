@@ -1,11 +1,12 @@
 
-from function.BasicServerConnect import BasicServerConnect #伺服器上傳/連接
+from function.BasicServerConnect import BasicServerConnect, FileUploader
 from function.ThreadingRecording import AudioExperiment #多線程實驗執行器
 from function.DataSaver import DataSaver #資料儲存
 from function.ConfigLoader import ConfigLoader #config載入器
 from function.ButtonController import ButtonController #按鈕控制器
 from function.LEDController import LEDController #LED控制器
-import time,os
+from function.controler import Experiment #統一實驗調度器
+import time, os, logging
 import threading
 """
 # 設置GPIO模式為BCM
@@ -20,44 +21,76 @@ led_pins = [2, 3, 4]  # 三個LED的GPIO針腳
 os.chdir("/home/led/project/Basic-experimental-framework")
 config_dir = 'config' # 設定config目錄，會自動讀取全部檔案
 edgeID = 'Sound3' #裝置編號
+logging.basicConfig(filename=os.path.join('out','Running.log'), level=logging.DEBUG)#log設定
 ###############################################################
 
+
 #讀取config
-config_data = ConfigLoader(config_dir).config_dict
+system_config_data = ConfigLoader(config_dir).config_dict
 # 創建LED控制器
-led_controller = LEDController(config_data)
+led_controller = LEDController(system_config_data)
 
 # 定義按鈕的功能
-def DoEx(channel):#啟動錄音
-    print("啟動錄音")
-    #創造資料夾並儲存
-    data_saver = DataSaver(config_data) #初始化 儲存器物件
-    config_data['path']['output_dir-final'] = data_saver.dir_path #設定資料夾
-    #TODO(LED): 實驗任務調度器
-    #開始錄音實驗
-    Audio_Experiment = AudioExperiment(config_data) #初始化 實驗物件
-    Audio_Experiment.run_experiment() #執行實驗
+def DoEx(channel):#啟動實驗
+    try:
+        for pin in led_controller.all_pins:
+            led_controller.turn_off(pin)
+        led_controller.turn_on(led_controller.orange_pin)
+        Send_State = BasicServerConnect(system_config_data)
+        Send_State.send_status("waiting_for_prepare")
 
-    #TODO(LED): 統一調度
-    while Audio_Experiment.get_is_handle_finish() is False: #等待實驗完成
-        time.sleep(0.1)  # 暫停1秒
+        DoEx_config_dir = 'config/DoEx'
+        config_data = ConfigLoader(DoEx_config_dir).config_dict
 
-    data_saver.save_data_to_json(
+        data_saver = DataSaver(config_data)
+        config_data['path']['output_dir-final'] = data_saver.dir_path
+
+        Send_State.send_status("Starting_Ex")
+        Audio_Experiment = AudioExperiment(config_data)
+        Audio_Experiment.run_experiment()
+
+        # while Audio_Experiment.get_is_handle_finish() is False:
+        #     time.sleep(0.1)
+
+        data_saver.save_data_to_json(
         Audio_Experiment.get_handle_results(),
-        config_data['path']['output_data_filename'])#儲存實驗結果
-    uploader = BasicServerConnect(edgeID, data_saver.dir_path)  # 建立一個FileUploader實例
-    uploader.upload_files()  
-    print("finish")
+        config_data['path']['output_data_filename'])
+        Send_State.send_status("Finish_Ex")
+    except Exception as e:
+        print(f"Error DoEx:{e}")
+        for pin in led_controller.all_pins:
+            led_controller.turn_off(pin)
+        led_controller.blink(led_controller.red_pin,3)
+        return 4
+    
+        
+    # #file upload
+    try:
+        uploader = FileUploader(system_config_data, data_saver.dir_path)
+        uploader.upload_files()
+        Send_State.send_status("finish_upload_files")
+        logging.info('DoEx: finish_upload_files')
+    except Exception as e:
+        logging.error(f"Error uploading files: {e}")
+        print(f"Error uploading files:{e}")
+        return 4
+
+    led_controller.turn_off(led_controller.orange_pin)
+    led_controller.blink(led_controller.green_pin,3)
+
+    return 1
 
 def turn_on_leds(channel):#強制暫停(TODO)
     print("開啟LED燈")
     for pin in led_controller.all_pins:
         led_controller.turn_on(pin)
+    return 1
 
 def turn_off_leds(channel):#無功能，暫時為重設LED燈(好像沒用(X))
     print("關閉LED燈")
     for pin in led_controller.all_pins:
         led_controller.turn_off(pin)
+    return 1
 
 
 
@@ -67,7 +100,7 @@ def turn_off_leds(channel):#無功能，暫時為重設LED燈(好像沒用(X))
 
 # 創建按鈕控制器，並將按鈕的功能作為參數傳遞
 button_functions = [DoEx, turn_on_leds, turn_off_leds]
-button_controller = ButtonController(config_data,button_functions=button_functions, led_controller=led_controller) #onboard處理
+button_controller = ButtonController(system_config_data,button_functions=button_functions, led_controller=led_controller) #onboard處理
 thread = threading.Thread(target=button_controller.run, args=())
 # 運行按鈕控制器
 

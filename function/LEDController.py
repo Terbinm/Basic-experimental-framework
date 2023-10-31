@@ -49,13 +49,16 @@ class LEDController:
     def turn_on(self, pin):
         GPIO.output(pin, GPIO.HIGH)
 
-    def blink(self, pin, blink_time):#pin:腳位，times:閃爍次數
-        self.blink_flag = 1
-        blink_time=self.blink_time
+    def blink(self, pin, blink_time=None):#pin:腳位，times:閃爍次數
         if self.blink_flag == 1:
             return 5 #等待
-        
-        count = blink_time
+        self.blink_flag = 1
+
+        if blink_time:
+            count = self.blink_time
+        else:
+            count = blink_time
+
         while True:
             count = self.blink_unit(pin, count)
             if count == 0:

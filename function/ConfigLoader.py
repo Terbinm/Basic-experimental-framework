@@ -5,7 +5,6 @@ import concurrent.futures
 class ConfigLoader:
     def __init__(self, config_dir):
         self.config_dir = config_dir
-
         self.config_dict = self.load_all_configs()
 
     def convert_value(self, value):
@@ -37,18 +36,13 @@ class ConfigLoader:
         ini_files = [os.path.join(self.config_dir, f) for f in os.listdir(self.config_dir) if f.endswith('.ini')]
         all_configs = {}
 
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            future_to_file = {executor.submit(self.load_config, file): file for file in ini_files}
-            for future in concurrent.futures.as_completed(future_to_file):
-                try:
-                    data = future.result()
-                except Exception as exc:
-                    print(f'Generated an exception: {exc}')
-                else:
-                    all_configs.update(data)
+        for file in ini_files:
+            try:
+                data = self.load_config(file)
+            except Exception as exc:
+                print(f'Generated an exception: {exc}')
+            else:
+                all_configs.update(data)
 
         return all_configs
 
-# 測試用
-# config_loader = ConfigLoader('config')
-# print(config_loader.config_dict)
