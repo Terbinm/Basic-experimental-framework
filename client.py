@@ -29,6 +29,7 @@ try:
     logging.info('DoEx: waiting for prepare')
 except Exception as e:
     logging.error(f"DoEx: Error starting experiment-{e}")
+    print(f"DoEx: Error starting experiment-{e}")
 
 
 #下載connfig(實驗用)(未來要做)TODO
@@ -40,6 +41,7 @@ try:
     logging.info('DoEx: Config loaded')
 except Exception as e:
     logging.error(f"DoEx: Error loading experiment config-{e}")
+    print(f"DoEx: Error loading experiment config-{e}")
 
 #創造資料夾並儲存
 try:
@@ -48,6 +50,7 @@ try:
     logging.info('DoEx: path created')
 except Exception as e:
     logging.error(f"DoEx: Error creating path-{e}")
+    print(f"DoEx: Error creating path-{e}")
 
 #TODO(LED): 實驗任務調度器
 #開始錄音實驗
@@ -58,6 +61,7 @@ try:
     Audio_Experiment.run_experiment() #執行實驗
 except Exception as e:
     logging.error(f"DoEx: Error starting audio experiment-{e}")
+    print(f"DoEx: Error starting audio experiment-{e}")
 
 #TODO(LED): 統一調度
 #等待實驗完成
@@ -66,6 +70,7 @@ try:
         time.sleep(0.1)  # 暫停1秒
 except Exception as e:
     logging.error(f"DoEx:Error during audio experiment-{e}")
+    print(f"DoEx:Error during audio experiment-{e}")
    
 #儲存結果到檔案 
 try:
@@ -75,7 +80,8 @@ try:
     Send_State.send_status("Finish_Ex")
     logging.info('DoEx: Finish_Ex')
 except Exception as e:
-    logging.error(f"Error saving experiment results:-{e}")
+    logging.error(f"Error saving experiment results: {e}")
+    print(f"Error saving experiment results: {e}")
 
 # 實驗完成，上傳檔案
 try:
@@ -85,6 +91,7 @@ try:
     logging.info('DoEx: finish_upload_files')
 except Exception as e:
     logging.error(f"Error uploading files: {e}")
+    print(f"Error uploading files:{e}")
     
 
 logging.info('DoEx: finish_Ex')
