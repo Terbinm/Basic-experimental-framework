@@ -18,7 +18,7 @@ led_pins = [2, 3, 4]  # 三個LED的GPIO針腳
 """
 ###############################################################
 #設定路徑(程式執行的路徑)
-os.chdir("/home/led/project/Basic-experimental-framework")
+os.chdir("/home/led/edge-project/Basic-experimental-framework")
 config_dir = 'config' # 設定config目錄，會自動讀取全部檔案
 edgeID = 'Sound3' #裝置編號
 logging.basicConfig(filename=os.path.join('out','Running.log'), level=logging.DEBUG)#log設定

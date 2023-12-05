@@ -7,7 +7,7 @@ from function.DataSaver import DataSaver
 from function.ThreadingRecording import AudioExperiment
 
 #設定路徑(程式執行的路徑)#外部應該回傳的參數
-os.chdir("/home/led/project/Basic-experimental-framework")
+os.chdir("/home/led/edge-project/Basic-experimental-framework")
 #讀取config(系統)
 System_config_dir = 'config' # 設定config目錄，會自動讀取全部檔案
 System_config_data = ConfigLoader(System_config_dir).config_dict

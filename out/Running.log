@@ -1412,3 +1412,68 @@ DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "POST /input/Sound4/2023-11-0
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
 DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "POST /status HTTP/1.1" 200 30
 INFO:root:DoEx: finish_upload_files
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+INFO:root:DoEx: waiting for prepare
+INFO:root:DoEx: Config loaded
+INFO:root:DoEx: path created
+INFO:root:DoEx: Starting_Ex
+INFO:root:DoEx: Finish_Ex
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+INFO:root:DoEx: finish_upload_files
+INFO:root:DoEx: finish_Ex
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+INFO:root:DoEx: waiting for prepare
+INFO:root:DoEx: Config loaded
+INFO:root:DoEx: path created
+INFO:root:DoEx: Starting_Ex
+INFO:root:DoEx: Finish_Ex
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+INFO:root:DoEx: finish_upload_files
+INFO:root:DoEx: finish_Ex
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "GET /connect_test HTTP/1.1" 308 277
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "GET /connect_test/ HTTP/1.1" 200 9
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "POST /status HTTP/1.1" 200 30
+INFO:root:DoEx: waiting for prepare
+INFO:root:DoEx: Config loaded
+INFO:root:DoEx: path created
+INFO:root:DoEx: Starting_Ex
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "POST /status HTTP/1.1" 200 30
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "POST /status HTTP/1.1" 200 30
+INFO:root:DoEx: Finish_Ex
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "GET /connect_test HTTP/1.1" 308 277
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "GET /connect_test/ HTTP/1.1" 200 9
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "POST /input/Sound4/2023-12-05-16-57-06/ HTTP/1.1" 200 14
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "POST /input/Sound4/2023-12-05-16-57-06/ HTTP/1.1" 200 14
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "POST /input/Sound4/2023-12-05-16-57-06/ HTTP/1.1" 200 14
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:9997
+DEBUG:urllib3.connectionpool:http://127.0.0.1:9997 "POST /status HTTP/1.1" 200 30
+INFO:root:DoEx: finish_upload_files
+INFO:root:DoEx: finish_Ex
