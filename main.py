@@ -18,9 +18,9 @@ led_pins = [2, 3, 4]  # 三個LED的GPIO針腳
 """
 ###############################################################
 #設定路徑(程式執行的路徑)
-os.chdir("/home/led/edge-project/Basic-experimental-framework")
+os.chdir("/home/led/project/Basic-experimental-framework")
 config_dir = 'config' # 設定config目錄，會自動讀取全部檔案
-edgeID = 'Sound3' #裝置編號
+edgeID = 'Soundtest_ModelA' #裝置編號 #不需設定，已廢棄
 logging.basicConfig(filename=os.path.join('out','Running.log'), level=logging.DEBUG)#log設定
 ###############################################################
 
@@ -30,13 +30,14 @@ system_config_data = ConfigLoader(config_dir).config_dict
 # 創建LED控制器
 led_controller = LEDController(system_config_data)
 
+# 創建網路連線
+Send_State = BasicServerConnect(system_config_data) 
 # 定義按鈕的功能
 def DoEx(channel):#啟動實驗
     try:
         for pin in led_controller.all_pins:
             led_controller.turn_off(pin)
         led_controller.turn_on(led_controller.orange_pin)
-        Send_State = BasicServerConnect(system_config_data)
         Send_State.send_status("waiting_for_prepare")
 
         DoEx_config_dir = 'config/DoEx'
@@ -55,7 +56,7 @@ def DoEx(channel):#啟動實驗
         data_saver.save_data_to_json(
         Audio_Experiment.get_handle_results(),
         config_data['path']['output_data_filename'])
-        Send_State.send_status("Finish_Ex")
+        Send_State.send_status("Finish_Ex: "+str(data_saver.dir_path))
     except Exception as e:
         print(f"Error DoEx:{e}")
         for pin in led_controller.all_pins:
@@ -105,4 +106,5 @@ thread = threading.Thread(target=button_controller.run, args=())
 # 運行按鈕控制器
 
 
+Send_State.send_status("Online") 
 thread.start() #原...程式，啟動！
